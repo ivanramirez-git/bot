@@ -60,6 +60,18 @@ public class BotBaseListener implements BotListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterWhile_cicle(BotParser.While_cicleContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitWhile_cicle(BotParser.While_cicleContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterParameters(BotParser.ParametersContext ctx) { }
 	/**
 	 * {@inheritDoc}

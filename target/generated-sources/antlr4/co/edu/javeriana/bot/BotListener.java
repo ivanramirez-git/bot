@@ -46,6 +46,16 @@ public interface BotListener extends ParseTreeListener {
 	 */
 	void exitIf_else_conditional(BotParser.If_else_conditionalContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link BotParser#while_cicle}.
+	 * @param ctx the parse tree
+	 */
+	void enterWhile_cicle(BotParser.While_cicleContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link BotParser#while_cicle}.
+	 * @param ctx the parse tree
+	 */
+	void exitWhile_cicle(BotParser.While_cicleContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link BotParser#parameters}.
 	 * @param ctx the parse tree
 	 */

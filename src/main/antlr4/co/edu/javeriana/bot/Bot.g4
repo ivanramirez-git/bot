@@ -35,7 +35,6 @@ program:
 		}
 	};
 
-
 //sentence:
 //	down_movement
 //	| up_movement
@@ -53,6 +52,7 @@ sentence returns[ASTNode node]:
 	output{$node =$output.node;}
 	|comment
 	| if_else_conditional{$node =$if_else_conditional.node;}
+	| while_cicle{$node = $while_cicle.node;}
 	| down_movement {$node =$down_movement.node;}
 	| up_movement {$node =$up_movement.node;}
 	| left_movement {$node =$left_movement.node;}
@@ -100,16 +100,17 @@ if_else_conditional returns[ASTNode node]:
 	
 
 //ciclos 
-/*while_cicle returns[ASTNode node]:
+while_cicle returns[ASTNode node]:
 	WHILE  logic  ARROW_RIGHT 
 	{
 		List<ASTNode> body = new ArrayList<ASTNode>();
 	}
-		sentence* END SEMICOLON
+		(s1 = sentence{body.add($s1.node);})* 
+	 END SEMICOLON
 	{
-		$node= new While($logic.node,body,elseBody);
+		$node = new While($logic.node,body);
 	};
-*/
+
 //funciones
 
 parameters returns[ASTNode node]: VAR ID COMMA?;

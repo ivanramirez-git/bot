@@ -37,6 +37,12 @@ public interface BotVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitIf_else_conditional(BotParser.If_else_conditionalContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link BotParser#while_cicle}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitWhile_cicle(BotParser.While_cicleContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link BotParser#parameters}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
