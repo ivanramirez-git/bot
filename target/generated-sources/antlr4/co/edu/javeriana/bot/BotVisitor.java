@@ -1,7 +1,6 @@
 // Generated from co\edu\javeriana\bot\Bot.g4 by ANTLR 4.5.1
 package co.edu.javeriana.bot;
 
-
 	import org.jpavlich.bot.*;
 	import org.jpavlich.bot.Bot;
 	import co.edu.javeriana.bot.ast.*;
@@ -43,17 +42,17 @@ public interface BotVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitWhile_cicle(BotParser.While_cicleContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link BotParser#parameters}.
+	 * Visit a parse tree produced by {@link BotParser#function_declaration}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitParameters(BotParser.ParametersContext ctx);
+	T visitFunction_declaration(BotParser.Function_declarationContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link BotParser#function}.
+	 * Visit a parse tree produced by {@link BotParser#function_call}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitFunction(BotParser.FunctionContext ctx);
+	T visitFunction_call(BotParser.Function_callContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link BotParser#up_movement}.
 	 * @param ctx the parse tree

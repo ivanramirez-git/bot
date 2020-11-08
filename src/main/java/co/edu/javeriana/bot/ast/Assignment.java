@@ -1,7 +1,5 @@
 package co.edu.javeriana.bot.ast;
 
-import java.util.Map;
-
 public class Assignment implements ASTNode {
 
 	private String name;
@@ -16,9 +14,14 @@ public class Assignment implements ASTNode {
 
 
 	@Override
-	public Object execute(Map<String, Object> symbolTable) {
-		//System.out.println("estoy aqui");
-		symbolTable.put(name, expression.execute(symbolTable));
+	public Object execute(Context context) {
+		if (context.get(name)==null) {
+			
+			context.declaration(name);
+			
+		}
+		
+		context.assigment(name, expression.execute(context));
 		return null;
 	}
 

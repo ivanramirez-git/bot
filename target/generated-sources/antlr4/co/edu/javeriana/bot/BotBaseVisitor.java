@@ -1,7 +1,6 @@
 // Generated from co\edu\javeriana\bot\Bot.g4 by ANTLR 4.5.1
 package co.edu.javeriana.bot;
 
-
 	import org.jpavlich.bot.*;
 	import org.jpavlich.bot.Bot;
 	import co.edu.javeriana.bot.ast.*;
@@ -53,14 +52,14 @@ public class BotBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements Bo
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitParameters(BotParser.ParametersContext ctx) { return visitChildren(ctx); }
+	@Override public T visitFunction_declaration(BotParser.Function_declarationContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitFunction(BotParser.FunctionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitFunction_call(BotParser.Function_callContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *

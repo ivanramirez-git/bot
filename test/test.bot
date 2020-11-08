@@ -1,12 +1,19 @@
-'v<-5;
-if @T&!(v=5) ->
-	$ v;
-	> 5;
-else
-	$ 0;
-	P;
-	while v>0 ->
-		$ v;
-		v<-v-1;
-	end;
+'long<-0.5;
+$ long;
+define diagonal('width,'long) ->
+
+		V long;
+		$ long;
+		> width;
+		$ width;
+	$ "diagonal terminada";
 end;
+
+'a<-"Vamos Siuhhh";
+
+if a = "N" & (2+3*5 >= 6) | (60-6/2 <> 8) ->
+	diagonal(5,7);
+end;
+long<-(0.25+0.50);
+$ long;
+$ a;

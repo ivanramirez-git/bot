@@ -1,6 +1,5 @@
 grammar Bot;
 @header {
-
 	import org.jpavlich.bot.*;
 	import org.jpavlich.bot.Bot;
 	import co.edu.javeriana.bot.ast.*;
@@ -9,7 +8,6 @@ grammar Bot;
 }
 
 @parser::members {
-
 	Map<String, Object> symbolTable = new HashMap<String, Object>();
 	private Bot bot;
 	
@@ -26,31 +24,19 @@ grammar Bot;
 program:
 	{
 		List<ASTNode> body = new ArrayList<ASTNode>();
-		Map<String, Object> symbolTable = new HashMap<String, Object>();
+		Context context= new Context();
 	}
 	 (sentence{body.add($sentence.node);})*
 	{
 		for(ASTNode n: body){
-			n.execute(symbolTable);
+			n.execute(context);
 		}
 	};
 
-//sentence:
-//	down_movement
-//	| up_movement
-//	| left_movement
-//	| right_movement
-//	| pick
-//	| drop
-//	| output
-//	| comment
-//	| declaration
-//	| assignment
-//	| both;
-
 sentence returns[ASTNode node]:
 	output{$node =$output.node;}
-	|comment
+	|function_declaration{$node = $function_declaration.node;}
+	|function_call{$node = $function_call.node;}
 	| if_else_conditional{$node =$if_else_conditional.node;}
 	| while_cicle{$node = $while_cicle.node;}
 	| down_movement {$node =$down_movement.node;}
@@ -61,7 +47,8 @@ sentence returns[ASTNode node]:
 	| assignment{$node =$assignment.node;}
 	| both {$node =$both.node;}
 	| pick {$node =$pick.node;}
-	| drop {$node =$drop.node;};
+	| drop {$node =$drop.node;}
+	;
 	
 /*
  * condition //returns [ASTNode node]:
@@ -84,21 +71,6 @@ if_else_conditional returns[ASTNode node]:
 		$node= new If($logic.node,body,elseBody);
 	};
 
-
-//if_conditional returns[ASTNode node]: 
-//	IF arithmetic ARROW_RIGHT 
-//	{
-//		List<ASTNode> body = new ArrayList<ASTNode>();
-//		List<ASTNode> elseBody = new ArrayList<ASTNode>();
-//	}
-//		(s1=sentence{body.add($s1.node);})* 
-//	END SEMICOLON
-//	{
-//		$node= new If($arithmetic.node,body,elseBody);
-//	};
-
-	
-
 //ciclos 
 while_cicle returns[ASTNode node]:
 	WHILE  logic  ARROW_RIGHT 
@@ -112,10 +84,24 @@ while_cicle returns[ASTNode node]:
 	};
 
 //funciones
+//parameters returns[ASTNode node]: VAR ID COMMA? {$node = $ID.text;};
 
-parameters returns[ASTNode node]: VAR ID COMMA?;
-function returns[ASTNode node]:
-	DEFINE ID PARENTHESIS parameters* RIGHTPARENTHESIS ARROW_RIGHT sentence* END SEMICOLON;
+function_declaration returns[ASTNode node]:
+	{
+		List<String> head = new ArrayList<String>();
+		List<ASTNode> body = new ArrayList<ASTNode>();
+	}
+	DEFINE ID PARENTHESIS (VAR i1=ID {head.add($i1.text);} COMMA?)* RIGHTPARENTHESIS ARROW_RIGHT
+		(s1 = sentence{body.add($s1.node);})*
+		{$node = new FunDeclaration($ID.text,head,body);}
+	END SEMICOLON;
+
+function_call returns[ASTNode node]:
+	ID PARENTHESIS 
+	{
+		List<ASTNode> head = new ArrayList<ASTNode>();	
+	}
+	(e1=expression{head.add($e1.node);})(COMMA e2=expression{head.add($e2.node);})* {$node = new FunCall($ID.text,head);} RIGHTPARENTHESIS SEMICOLON;
 
 //movimiento del robot---------------------------------------
 up_movement returns[ASTNode node]:
@@ -170,7 +156,7 @@ factor
 	)*;
 term
 	returns[ASTNode node]:
-	NUMBER {$node = new Constant(Integer.parseInt($NUMBER.text));}
+	NUMBER {$node = new Constant(Double.parseDouble($NUMBER.text));}
 	| FALSE {$node = new Constant(false);}
 	| TRUE {$node = new Constant(true);}
 	| ID  {$node = new VarReference($ID.text);}
@@ -182,8 +168,9 @@ dato
 	STRING {$node = new Constant($STRING.text);}
 	| FALSE {$node = new Constant(false);}
 	| TRUE {$node = new Constant(true);}
-	| NUMBER {$node = new Constant(Integer.parseInt($NUMBER.text));}
-	| FLOAT {$node = new Constant(Float.parseFloat($FLOAT.text));};
+	| NUMBER {$node = new Constant(Double.parseDouble($NUMBER.text));}
+	//| FLOAT {$node = new Constant(Float.parseFloat($FLOAT.text));}
+	;
 	
 
 	
@@ -213,8 +200,8 @@ comment: COMMENT STRING;
 STRING: '"' (~'"')+ '"';
 TRUE: '@T';
 FALSE: '@F';
-NUMBER: [0-9]+;
-FLOAT: NUMBER '.' NUMBER*;
+NUMBER: [0-9]+('.'[0-9]+)?;
+//FLOAT: NUMBER '.' NUMBER*;
 BOOLEAN: '@' [t|f];
 
 COMMENT: '#';
@@ -278,6 +265,3 @@ VAR: '\'';
 ID: [a-zA-z_][a-zA-z0-9_]*;
 
 WS: [ \t\r\n]+ -> skip;
-
-
-
