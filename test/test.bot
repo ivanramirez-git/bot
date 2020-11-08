@@ -9,10 +9,19 @@ define diagonal('width,'long) ->
 	$ "diagonal terminada";
 end;
 
+define imprimir('dato, 'veces)->
+	while(veces>0)->
+		$ dato;
+		
+		veces<-veces-1;
+	end;
+end;
+
 'a<-"Vamos Siuhhh";
 
 if a = "N" & (2+3*5 >= 6) | (60-6/2 <> 8) ->
 	diagonal(5,7);
+	imprimir("IvanRene",4);
 end;
 long<-(0.25+0.50);
 $ long;
