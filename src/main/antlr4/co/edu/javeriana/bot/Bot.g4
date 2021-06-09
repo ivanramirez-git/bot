@@ -48,6 +48,7 @@ sentence returns[ASTNode node]:
 	| both {$node =$both.node;}
 	| pick {$node =$pick.node;}
 	| drop {$node =$drop.node;}
+	| input {$node =$input.node;}
 	;
 	
 /*
@@ -130,14 +131,28 @@ both returns[ASTNode node]:
 
 //impresion y lectura por pantalla
 output returns[ASTNode node]:
-	DOLLAR (
-		expression {$node = new Output($expression.node);}
-	) SEMICOLON;
+	DOLLAR 
+		{
+			List<ASTNode> cu = new ArrayList<ASTNode>();
+		}
+		((prin=expression{cu.add($prin.node);})PLUS?)* 
+	 SEMICOLON
+	 {
+	 	$node = new Output(cu);
+	 };
+
+input returns[ASTNode node]:
+	QUESTION ID SEMICOLON
+	 {
+	 	{$node = new  Input($ID.text);};
+	 };
+
+
 
 expression
 	returns[ASTNode node]:
-	dato {$node = $dato.node;}
-	| arithmetic {$node = $arithmetic.node;}
+	arithmetic {$node = $arithmetic.node;}
+	| dato {$node = $dato.node;}
 	| ID {$node = new VarReference($ID.text);};
 
 //expresiones aritmeticas

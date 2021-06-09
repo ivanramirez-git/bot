@@ -1,4 +1,4 @@
-// Generated from Bot.g4 by ANTLR 4.4
+// Generated from co\edu\javeriana\bot\Bot.g4 by ANTLR 4.5.1
 package co.edu.javeriana.bot;
 
 	import org.jpavlich.bot.*;
@@ -18,7 +18,7 @@ import org.antlr.v4.runtime.misc.*;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
 public class BotLexer extends Lexer {
-	static { RuntimeMetaData.checkVersion("4.4", RuntimeMetaData.VERSION); }
+	static { RuntimeMetaData.checkVersion("4.5.1", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
 	protected static final PredictionContextCache _sharedContextCache =
@@ -35,15 +35,6 @@ public class BotLexer extends Lexer {
 		"DEFAULT_MODE"
 	};
 
-	public static final String[] tokenNames = {
-		"'\\u0000'", "'\\u0001'", "'\\u0002'", "'\\u0003'", "'\\u0004'", "'\\u0005'", 
-		"'\\u0006'", "'\\u0007'", "'\b'", "'\t'", "'\n'", "'\\u000B'", "'\f'", 
-		"'\r'", "'\\u000E'", "'\\u000F'", "'\\u0010'", "'\\u0011'", "'\\u0012'", 
-		"'\\u0013'", "'\\u0014'", "'\\u0015'", "'\\u0016'", "'\\u0017'", "'\\u0018'", 
-		"'\\u0019'", "'\\u001A'", "'\\u001B'", "'\\u001C'", "'\\u001D'", "'\\u001E'", 
-		"'\\u001F'", "' '", "'!'", "'\"'", "'#'", "'$'", "'%'", "'&'", "'''", 
-		"'('", "')'", "'*'", "'+'"
-	};
 	public static final String[] ruleNames = {
 		"STRING", "TRUE", "FALSE", "NUMBER", "BOOLEAN", "COMMENT", "UP", "LEFT", 
 		"RIGHT", "DOWN", "DROP", "PICK", "SEMICOLON", "PLUS", "SUBTRACTION", "MULTIPLICATION", 
@@ -53,6 +44,54 @@ public class BotLexer extends Lexer {
 		"BR_CLOSE", "VAR", "ID", "WS"
 	};
 
+	private static final String[] _LITERAL_NAMES = {
+		null, null, "'@T'", "'@F'", null, null, "'#'", "'^'", null, null, "'V'", 
+		"'D'", "'P'", "';'", "'+'", "'-'", "'*'", "'/'", "','", "'<-'", "'?'", 
+		"'$'", "'if'", "'else'", "'->'", "'end'", "'&'", "'|'", "'!'", null, null, 
+		"'<='", "'>='", "'='", "'<>'", "'('", "')'", "'define'", "'while'", "'{'", 
+		"'}'", "'''"
+	};
+	private static final String[] _SYMBOLIC_NAMES = {
+		null, "STRING", "TRUE", "FALSE", "NUMBER", "BOOLEAN", "COMMENT", "UP", 
+		"LEFT", "RIGHT", "DOWN", "DROP", "PICK", "SEMICOLON", "PLUS", "SUBTRACTION", 
+		"MULTIPLICATION", "DIVISION", "COMMA", "ASSIGN", "QUESTION", "DOLLAR", 
+		"IF", "ELSE", "ARROW_RIGHT", "END", "AND", "OR", "NOT", "MINOR", "MAYOR", 
+		"MINOREQ", "MAYOREQ", "EQUAL", "NOTEQUAL", "PARENTHESIS", "RIGHTPARENTHESIS", 
+		"DEFINE", "WHILE", "BR_OPEN", "BR_CLOSE", "VAR", "ID", "WS"
+	};
+	public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
+
+	/**
+	 * @deprecated Use {@link #VOCABULARY} instead.
+	 */
+	@Deprecated
+	public static final String[] tokenNames;
+	static {
+		tokenNames = new String[_SYMBOLIC_NAMES.length];
+		for (int i = 0; i < tokenNames.length; i++) {
+			tokenNames[i] = VOCABULARY.getLiteralName(i);
+			if (tokenNames[i] == null) {
+				tokenNames[i] = VOCABULARY.getSymbolicName(i);
+			}
+
+			if (tokenNames[i] == null) {
+				tokenNames[i] = "<INVALID>";
+			}
+		}
+	}
+
+	@Override
+	@Deprecated
+	public String[] getTokenNames() {
+		return tokenNames;
+	}
+
+	@Override
+
+	public Vocabulary getVocabulary() {
+		return VOCABULARY;
+	}
+
 
 	public BotLexer(CharStream input) {
 		super(input);
@@ -61,9 +100,6 @@ public class BotLexer extends Lexer {
 
 	@Override
 	public String getGrammarFileName() { return "Bot.g4"; }
-
-	@Override
-	public String[] getTokenNames() { return tokenNames; }
 
 	@Override
 	public String[] getRuleNames() { return ruleNames; }

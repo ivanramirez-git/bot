@@ -114,6 +114,12 @@ public interface BotVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitOutput(BotParser.OutputContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link BotParser#input}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitInput(BotParser.InputContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link BotParser#expression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

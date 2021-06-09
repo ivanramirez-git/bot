@@ -16,7 +16,6 @@ public class Substraction implements ASTNode {
 	@Override
 	public Object execute(Context context) {
 		// TODO Auto-generated method stub
-		return  (double)operand1.execute(context) - (double)operand2.execute(context);
-	}
+		return  (double)operand1.execute(context) - (double)operand2.execute(context);	}
 
 }
